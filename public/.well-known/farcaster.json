@@ -8,9 +8,9 @@
     "version": "next",
     "name": "GeoTrade",
     "iconUrl": "https://geotrade.app/icon.png",
-    "homeUrl": "https://geotrade.app",
+    "homeUrl": "https://app-d508f9c3-r9b9.vercel.app",
     "splashImageUrl": "https://geotrade.app/splash.png",
     "splashBackgroundColor": "#0a1929",
-    "webhookUrl": "https://geotrade.app/api/webhook"
+    "webhookUrl": "https://app-d508f9c3-r9b9.vercel.app/api/webhook"
   }
 }
