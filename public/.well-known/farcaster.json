@@ -7,10 +7,10 @@
   "frame": {
     "version": "next",
     "name": "GeoTrade",
-    "homeUrl": "https://geotrade.farcaster.app",
+    "homeUrl": "https://app-d508f9c3-tdvc.vercel.app",
     "iconUrl": "https://geotrade.farcaster.app/icon.png",
     "splashImageUrl": "https://geotrade.farcaster.app/splash.png",
     "splashBackgroundColor": "#1c2333",
-    "webhookUrl": "https://geotrade.farcaster.app/api/webhook"
+    "webhookUrl": "https://app-d508f9c3-tdvc.vercel.app/api/webhook"
   }
 }
