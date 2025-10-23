@@ -1,7 +1,7 @@
 export interface Region {
   id: string;
   name: string;
-  type: 'country' | 'state' | 'city';
+  type: 'city' | 'state' | 'country';
   latitude: number;
   longitude: number;
   currentGDP: number;

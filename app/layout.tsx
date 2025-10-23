@@ -1,10 +1,15 @@
 import type { Metadata } from 'next'
 import './globals.css'
-import { ThemeProvider } from './components/ThemeProvider'
+import { Providers } from './components/Providers'
 
 export const metadata: Metadata = {
-  title: 'Base Mini App',
-  description: 'Built with Zara',
+  title: 'GeoTrade - Invest in Regional Growth',
+  description: 'Onchain geo-economic data & prediction markets for public good',
+  openGraph: {
+    title: 'GeoTrade',
+    description: 'Invest in regional growth: onchain GEO data & prediction markets for public good.',
+    images: ['/og-image.png'],
+  },
 }
 
 export default function RootLayout({
@@ -15,9 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ThemeProvider defaultTheme="coinbase">
-          {children}
-        </ThemeProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

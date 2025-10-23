@@ -12,110 +12,142 @@ interface PredictionModalProps {
 export function PredictionModal({ region, onClose }: PredictionModalProps) {
   const [predictionType, setPredictionType] = useState<'long' | 'short'>('long');
   const [amount, setAmount] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const fee = parseFloat(amount) * 0.005 || 0;
-  const contribution = fee * 0.5;
+  const feePercentage = 0.5;
+  const publicGoodsPercentage = 50;
+  
+  const calculateFee = () => {
+    const amountNum = parseFloat(amount) || 0;
+    return (amountNum * feePercentage) / 100;
+  };
+
+  const calculateContribution = () => {
+    const fee = calculateFee();
+    return (fee * publicGoodsPercentage) / 100;
+  };
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
+    setIsProcessing(true);
     // Simulate transaction
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setIsSubmitting(false);
+    setIsProcessing(false);
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 animate-fade-in">
-      <div className="bg-surface rounded-lg max-w-md w-full p-6 shadow-xl">
-        <div className="flex items-center justify-between mb-6">
-          <h3 className="text-2xl font-bold">Predict Growth</h3>
-          <button 
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50 animate-fade-in">
+      <div className="bg-surface rounded-lg max-w-md w-full shadow-2xl">
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-primary/20">
+          <div>
+            <h3 className="text-xl font-bold text-text-primary">{region.name}</h3>
+            <p className="text-sm text-text-secondary mt-1">
+              Current Growth: <span className="text-success font-semibold">{region.gdpGrowthRate}%</span>
+            </p>
+          </div>
+          <button
             onClick={onClose}
-            className="p-2 hover:bg-bg rounded-lg transition-colors"
+            className="p-2 hover:bg-primary/10 rounded-lg transition-all duration-200"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-text-secondary" />
           </button>
         </div>
 
-        <div className="space-y-6">
+        {/* Body */}
+        <div className="p-6 space-y-6">
+          {/* Prediction Type */}
           <div>
-            <h4 className="font-semibold text-lg mb-2">{region.name}</h4>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="text-text-secondary">Current Growth</p>
-                <p className="font-semibold text-lg">{region.gdpGrowthRate.toFixed(2)}%</p>
-              </div>
-              <div>
-                <p className="text-text-secondary">HDI</p>
-                <p className="font-semibold text-lg">{region.hdi.toFixed(3)}</p>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium mb-3">Position Type</label>
+            <label className="block text-sm font-medium text-text-secondary mb-3">
+              Prediction Type
+            </label>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setPredictionType('long')}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-all ${
+                className={`flex items-center justify-center gap-2 p-4 rounded-lg border-2 transition-all duration-200 ${
                   predictionType === 'long'
-                    ? 'border-success bg-success bg-opacity-10 text-success'
-                    : 'border-primary border-opacity-20 hover:border-opacity-40'
+                    ? 'border-success bg-success/10 text-success'
+                    : 'border-primary/20 text-text-secondary hover:border-primary/40'
                 }`}
               >
                 <TrendingUp className="w-5 h-5" />
-                <span className="font-medium">Long</span>
+                <span className="font-semibold">Long</span>
               </button>
               <button
                 onClick={() => setPredictionType('short')}
-                className={`flex items-center justify-center gap-2 py-3 px-4 rounded-lg border-2 transition-all ${
+                className={`flex items-center justify-center gap-2 p-4 rounded-lg border-2 transition-all duration-200 ${
                   predictionType === 'short'
-                    ? 'border-error bg-error bg-opacity-10 text-error'
-                    : 'border-primary border-opacity-20 hover:border-opacity-40'
+                    ? 'border-error bg-error/10 text-error'
+                    : 'border-primary/20 text-text-secondary hover:border-primary/40'
                 }`}
               >
                 <TrendingDown className="w-5 h-5" />
-                <span className="font-medium">Short</span>
+                <span className="font-semibold">Short</span>
               </button>
             </div>
           </div>
 
+          {/* Amount Input */}
           <div>
-            <label className="block text-sm font-medium mb-2">Amount (USDC)</label>
+            <label className="block text-sm font-medium text-text-secondary mb-2">
+              Amount (USDC)
+            </label>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               placeholder="0.00"
-              className="w-full px-4 py-3 bg-bg border border-primary border-opacity-20 rounded-lg focus:outline-none focus:border-primary transition-colors"
+              className="w-full px-4 py-3 bg-bg border border-primary/20 rounded-lg text-text-primary placeholder-text-secondary focus:outline-none focus:border-primary transition-colors duration-200"
             />
           </div>
 
-          <div className="bg-bg rounded-lg p-4 space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="text-text-secondary">Trading Fee (0.5%)</span>
-              <span className="font-medium">${fee.toFixed(2)}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <span className="text-text-secondary">Public Goods Contribution</span>
-                <Info className="w-4 h-4 text-text-secondary" />
+          {/* Fee Breakdown */}
+          {amount && parseFloat(amount) > 0 && (
+            <div className="bg-primary/5 border border-primary/20 rounded-lg p-4 space-y-2">
+              <div className="flex items-start gap-2">
+                <Info className="w-4 h-4 text-primary mt-0.5" />
+                <div className="flex-1 space-y-2 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-text-secondary">Trading Fee ({feePercentage}%)</span>
+                    <span className="text-text-primary font-medium">
+                      ${calculateFee().toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-text-secondary">Public Goods Contribution</span>
+                    <span className="text-success font-semibold">
+                      ${calculateContribution().toFixed(2)}
+                    </span>
+                  </div>
+                  <div className="pt-2 border-t border-primary/20 flex justify-between">
+                    <span className="text-text-primary font-medium">Total Cost</span>
+                    <span className="text-text-primary font-bold">
+                      ${(parseFloat(amount) + calculateFee()).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
               </div>
-              <span className="font-medium text-success">${contribution.toFixed(2)}</span>
             </div>
-          </div>
+          )}
 
+          {/* Submit Button */}
           <button
             onClick={handleSubmit}
-            disabled={!amount || isSubmitting}
-            className="w-full py-3 bg-primary text-white rounded-lg hover:bg-opacity-90 transition-all font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={!amount || parseFloat(amount) <= 0 || isProcessing}
+            className="w-full py-3 bg-primary text-white font-semibold rounded-lg hover:bg-opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
           >
-            {isSubmitting ? 'Processing...' : `Place ${predictionType === 'long' ? 'Long' : 'Short'} Position`}
+            {isProcessing ? (
+              <span className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                Processing...
+              </span>
+            ) : (
+              `Place ${predictionType === 'long' ? 'Long' : 'Short'} Position`
+            )}
           </button>
 
           <p className="text-xs text-text-secondary text-center">
-            Transaction is gasless and sponsored by GeoTrade
+            ⚡ Gas-free transaction powered by Base Paymaster
           </p>
         </div>
       </div>

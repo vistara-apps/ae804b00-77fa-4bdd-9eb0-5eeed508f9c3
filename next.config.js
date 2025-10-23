@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['geotrade.app'],
+    domains: ['geotrade.farcaster.app'],
   },
 }
 
