@@ -1,39 +1,38 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
       colors: {
-        bg: "var(--color-bg)",
-        fg: "var(--color-fg)",
-        surface: "var(--color-surface)",
-        accent: "var(--color-accent)",
-        primary: "var(--color-primary)",
-        secondary: "var(--color-secondary)",
-        success: "var(--color-success)",
-        warning: "var(--color-warning)",
-        error: "var(--color-error)",
+        bg: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        primary: 'var(--color-primary)',
+        accent: 'var(--color-accent)',
+        success: 'var(--color-success)',
+        error: 'var(--color-error)',
+        warning: 'var(--color-warning)',
+        'text-primary': 'var(--color-text-primary)',
+        'text-secondary': 'var(--color-text-secondary)',
       },
       borderRadius: {
-        sm: "var(--radius-sm)",
-        md: "var(--radius-md)",
-        lg: "var(--radius-lg)",
+        'sm': '6px',
+        'md': '10px',
+        'lg': '16px',
       },
       spacing: {
-        xs: "var(--spacing-xs)",
-        sm: "var(--spacing-sm)",
-        md: "var(--spacing-md)",
-        lg: "var(--spacing-lg)",
-        xl: "var(--spacing-xl)",
+        'xs': '4px',
+        'sm': '8px',
+        'md': '12px',
+        'lg': '20px',
+        'xl': '32px',
       },
     },
   },
   plugins: [],
-};
-
-export default config;
+}
+export default config

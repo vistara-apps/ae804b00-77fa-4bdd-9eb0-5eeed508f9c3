@@ -7,10 +7,10 @@
   "frame": {
     "version": "next",
     "name": "GeoTrade",
+    "homeUrl": "https://geotrade.app",
     "iconUrl": "https://geotrade.app/icon.png",
-    "homeUrl": "https://app-d508f9c3-r9b9.vercel.app",
     "splashImageUrl": "https://geotrade.app/splash.png",
-    "splashBackgroundColor": "#0a1929",
-    "webhookUrl": "https://app-d508f9c3-r9b9.vercel.app/api/webhook"
+    "splashBackgroundColor": "#1c2333",
+    "webhookUrl": "https://geotrade.app/api/webhook"
   }
 }

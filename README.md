@@ -1,25 +1,26 @@
 # GeoTrade - Base Mini App
 
-Invest in regional growth: onchain GEO data & prediction markets for public good.
+Invest in regional growth: onchain geo-economic data & prediction markets for public good.
 
 ## Features
 
-- 🌍 **Interactive Global Map** - Real-time geo-economic data visualization
-- 📈 **Prediction Markets** - Long/short positions on regional development
-- 🏆 **Leaderboard** - Compete with top predictors globally
-- 💝 **Public Goods** - Automated contributions from trading fees
-- 🔗 **Base Integration** - Gasless transactions with OnchainKit
-- 🎯 **Farcaster Native** - Social sharing and notifications
+- 🌍 Interactive global economic map
+- 📊 Real-time geo-economic data visualization
+- 📈 Long/Short prediction markets on regional growth
+- 💚 Automated public goods contributions
+- 🏆 Global leaderboard system
+- 💰 Gasless transactions via Base
+- 🔗 Farcaster integration for social features
 
 ## Tech Stack
 
 - Next.js 15 with App Router
 - React 19
+- OnchainKit for Base integration
+- MiniKit for Farcaster features
 - TypeScript
 - Tailwind CSS
-- OnchainKit (Coinbase)
-- MiniKit (Farcaster)
-- Base Network (L2)
+- Coinbase theme
 
 ## Getting Started
 
@@ -28,30 +29,51 @@ Invest in regional growth: onchain GEO data & prediction markets for public good
 npm install
 ```
 
-2. Set up environment variables:
+2. Create `.env.local` file:
 ```bash
-NEXT_PUBLIC_ONCHAINKIT_API_KEY=your_key_here
+cp .env.local.example .env.local
 ```
 
-3. Run the development server:
+3. Add your API keys to `.env.local`
+
+4. Run development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000)
+5. Open [http://localhost:3000](http://localhost:3000)
+
+## Project Structure
+
+```
+app/
+├── components/       # React components
+├── data/            # Mock data
+├── types/           # TypeScript types
+├── layout.tsx       # Root layout
+├── page.tsx         # Main page
+└── globals.css      # Global styles
+
+public/
+└── .well-known/
+    └── farcaster.json  # Mini App manifest
+```
+
+## Key Components
+
+- **GeoMap**: Interactive world map with region data
+- **RegionTable**: Sortable table of top regions
+- **PredictionModal**: Interface for placing long/short positions
+- **Leaderboard**: Global rankings of top predictors
+- **ImpactDashboard**: Public goods contribution tracking
 
 ## Deployment
 
-Deploy to Vercel or any Next.js-compatible platform:
+Deploy to Vercel:
 
 ```bash
 npm run build
-npm start
 ```
-
-## Mini App Configuration
-
-The app includes a Farcaster manifest at `public/.well-known/farcaster.json` for Base App integration.
 
 ## License
 
